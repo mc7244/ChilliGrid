@@ -25,7 +25,7 @@
 <!-- right column -->
 <div align="center">
 <div id="rh-col">
-<h3 align="center">EuroHotel Azzano</h3>
+<h3 align="center">[% sitename | html %]</h3>
 <div align="center" style="color: red; font-weight:bold;">Rete WiFi - Login attivati [% month %]/[% year %]</div>
 
 <p style="height:5px"></p>

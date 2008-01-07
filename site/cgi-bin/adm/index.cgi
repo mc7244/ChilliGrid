@@ -12,6 +12,11 @@ use DateTime;
 use DateTime::Format::Strptime;
 use DateTime::Format::MySQL;
 
+our $VERSION = '0.02004';
+
+# Sitename for templates
+my $sitename = 'MY SITENAME';
+
 # Script name and path
 my $script_base = "http://www.mysite.com/cgi-bin/adm/index.cgi";
 
@@ -21,8 +26,6 @@ my $database_host      = 'localhost';
 my $database_port      = 3306;
 my $database_user      = 'freeradius';
 my $database_password  = 'pwd';
-
-our $VERSION = '0.02004';
 
 # Create query object
 my $q = new CGI::Simple;
@@ -63,6 +66,7 @@ sub emain {
 	my $now = DateTime->now( time_zone => 'local');
 	$t->process( $t_file, {
 		starttime	=> $dtf_strp->format_datetime($now),
+        sitename    => $sitename,
 	} );
 }
 
@@ -161,7 +165,10 @@ sub eview {
 		where mb_user_details.id = $id
 	") or die "eview-1: ".$dbh->errstr();
 
-	$t->process( $t_file,  { login_data => $login_ref } );
+	$t->process($t_file, {
+        login_data  => $login_ref.
+        sitename    => $sitename,
+    });
 }
 
 #######################################################################
@@ -195,9 +202,10 @@ sub elist {
 	my $logins_ref = $sth->fetchall_arrayref( {} );
 
 	$t->process( $t_file,  {
-		logins => $logins_ref,
-		month  => $month,
-		year   => $year,
+		logins    => $logins_ref,
+		month     => $month,
+		year      => $year,
+        sitename  => $sitename,
 	} );
 }
 

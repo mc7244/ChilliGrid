@@ -25,7 +25,7 @@
 <!-- right column -->
 <div align="center">
 <div id="rh-col">
-<h3 align="center">EuroHotel Azzano</h3>
+<h3 align="center">[% sitename | html %]</h3>
 <div align="center" style="color: red; font-weight:bold;">Rete WiFi - Dati di login</div>
 
 <p style="height:5px"></p>
@@ -60,7 +60,7 @@
 </p>
 
 <p>
-Qui di seguito sono riportare alcune indicazioni relative all'utilizzo della rete WiFi di Eurohotel Azzano, per l'accesso ad internet oppure per lo scambio di file con altri PC connessi alla stessa rete.
+Qui di seguito sono riportare alcune indicazioni relative all'utilizzo della rete WiFi di [% sitename | html %], per l'accesso ad internet oppure per lo scambio di file con altri PC connessi alla stessa rete.
 </p>
 
 <ul>
@@ -69,7 +69,7 @@ Qui di seguito sono riportare alcune indicazioni relative all'utilizzo della ret
 
   <li>Indirizzo IP, gateway e DNS sono assegnati dinamicamente. In caso non lo fossero gi&agrave;, spuntare le caselle ottieni automaticamento indirizzo IP ed ottieni automaticamente indirizzo DNS nella configurazione di rete del proprio PC.</li>
   <li>Per connettersi è necessaria una scheda WiFi aderente allo standard 802.11b oppure 802.11g.</li>
-  <li>La rete è protetta da intrusioni esterne, ma si consiglia di utilizzare ugualmente un firewall nel proprio PC. Eurohotel Azzano declina ogni responsabilità per intrusioni o altri danni di natura informatica occorsi al PC dei clienti.</li>
+  <li>La rete è protetta da intrusioni esterne, ma si consiglia di utilizzare ugualmente un firewall nel proprio PC. [% sitename | html %] declina ogni responsabilità per intrusioni o altri danni di natura informatica occorsi al PC dei clienti.</li>
   <li>Nel caso fosse richiesto un server SMTP per la spedizione di posta, utilizzate smtp.fastweb.it. Si prega di non abusare di questo servizio utilizzandolo per spedire e-mail di massa.</li>
 </ul>
 
