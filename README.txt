@@ -17,3 +17,6 @@ roamers will use for login.
 * A cron script which reaps users which access is expired, and logs them
 off if they're still logged on.
 
+* A metalog configuration addition to log (with iptables rules) all wireless
+network traffic
+

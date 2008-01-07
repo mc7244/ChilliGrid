@@ -1,0 +1,5 @@
+# Change with your IPs and data
+# See the metalog example for how to log this in a clear way
+
+-A FORWARD -m state -s 192.168.182.0/24 --state NEW,RELATED -j LOG  --log-level 6 --log-prefix "Wlansurf: "
+
