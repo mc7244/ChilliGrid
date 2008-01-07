@@ -1,16 +1,17 @@
 #!/usr/bin/perl
 
+our $VERSION = '0.01002';
+
+# Copyright (C) 2007 Michele Beltrame - http://www.cattlegrid.info/
+#
+# Based on the original code by:
 # chilli - ChilliSpot.org. A Wireless LAN Access Point Controller
 # Copyright (C) 2003, 2004 Mondru AB.
-#
 #
 # The contents of this file may be used under the terms of the GNU
 # General Public License Version 2, provided that the above copyright
 # notice and this permission notice is included in all copies or
 # substantial portions of the software.
-#
-# Edited by Michele Beltrame
-# License: GPL
 #
 # Redirects from ChilliSpot daemon:
 #
@@ -25,6 +26,8 @@
 #
 # logoff:  Response to a logout
 
+# A site name which will appear in the web pages.
+$sitename = "MY SITENAME";
 
 # Shared secret used to encrypt challenge with. Prevents dictionary attacks.
 # You should change this to your own shared secret.
@@ -52,53 +55,6 @@ $OK_CHARS='-a-zA-Z0-9_.@&=%!';
 $_ = $query=$ENV{QUERY_STRING};
 s/[^$OK_CHARS]/_/go;
 $query = $_;
-
-
-# If she did not use https tell her that it was wrong.
-=pod
-if (!($ENV{HTTPS} =~ /^on$/)) {
-    print "Content-type: text/html\n\n
-<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">
-<html>
-<head>
-  <title>WiFi Network - Login Failed</title>
-  <meta http-equiv=\"Cache-control\" content=\"no-cache\">
-  <meta http-equiv=\"Pragma\" content=\"no-cache\">
-  <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/2c-hd-lc-static-layout.css\" />
-  <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/2c-hd-lc-static-presentation.css\" />
-</head>
-<body bgColor = '#c0d8f4'>
-<div id=\"hdr\">
-<div style=\"font-weight:bold;font-size:12px;margin:6px 10px;\">
-</div>
-</div>
-<div align=\"center\">
-<div id=\"rh-col\">
-  <h3 style=\"text-align: center;\">ChilliSpot Login Failed</h3>
-  <center>
-    Login must use encrypted connection.
-  </center>
-</div>
-</div>
-</body>
-<!--
-<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<WISPAccessGatewayParam 
-  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
-  xsi:noNamespaceSchemaLocation=\"http://www.acmewisp.com/WISPAccessGatewayParam.xsd\">
-<AuthenticationReply>
-<MessageType>120</MessageType>
-<ResponseCode>102</ResponseCode>
-<ReplyMessage>Login must use encrypted connection</ReplyMessage>
-</AuthenticationReply> 
-</WISPAccessGatewayParam>
--->
-</html>
-";
-    exit(0);
-}
-
-=cut
 
 #Read form parameters which we care about
 @array = split('&',$input);
@@ -184,7 +140,7 @@ print "</head>
 <div align=\"center\">
 <div id=\"rh-col\">
 ";
-  print "<h3 style=\"text-align: center;\">Eurohotel Azzano</h3>";
+  print "<h3 style=\"text-align: center;\">$sitename</h3>";
   print "<div align=\"center\" style=\"color: red;\">Rete WiFi</div>";
   print "<p style=\"text-align:center; font-weight:bold\">Sto accedendo...</p>";
   print "<p style=\"text-align:center; font-weight:bold\">Logging in...</p>";
@@ -411,7 +367,7 @@ print "Content-type: text/html\n\n
 
 if ($result == 2) {
     print "
-  <h3 style=\"text-align: center;\">EuroHotel Azzano</h3>";
+  <h3 style=\"text-align: center;\">$sitename</h3>";
   print "<div align=\"center\" style=\"color: red;\">Rete WiFi - LOGIN</div>";
   print "<p style=\"text-align:center; font-weight:bold\">Errore login / Login error</p>";
     if ($reply) {
@@ -421,7 +377,7 @@ if ($result == 2) {
 
 if ($result == 5) {
     print "
-  <h3 style=\"text-align: center;\">EuroHotel Azzano</h3>";
+  <h3 style=\"text-align: center;\">$sitename</h3>";
   print "<div align=\"center\" style=\"color: red;\">Rete WiFi</div>";
   print "<p style=\"text-align:center; font-weight:bold\">Login</p>";
 }
@@ -459,7 +415,7 @@ if ($result == 2 || $result == 5) {
 
 if ($result == 1) {
   print "
-  <h3 style=\"text-align: center;\">Eurohotel Azzano</h3>
+  <h3 style=\"text-align: center;\">$sitename</h3>
   <p style=\"text-align:center; font-weight:bold\">Login effettuato con successo</p>
   <p style=\"text-align:center; font-weight:bold\">You are logged in</p>";
 
@@ -479,7 +435,7 @@ if ($result == 1) {
 
 if (($result == 4) || ($result == 12)) {
   print "
-  <h3 style=\"text-align: center;\">Eurohotel Azzano</h3>
+  <h3 style=\"text-align: center;\">$sitename</h3>
   <p style=\"text-align:center; font-weight:bold\">Login effettuato con successo</p>
   <p style=\"text-align:center; font-weight:bold\">You are logged in</p>
   <center>
@@ -493,7 +449,7 @@ if (($result == 4) || ($result == 12)) {
 
 
 if ($result == 11) {
-  print "<h3 style=\"text-align: center;\">Eurohotel Azzano</h3>";
+  print "<h3 style=\"text-align: center;\">$sitename</h3>";
   print "<div align=\"center\" style=\"color: red;\">Rete WiFi</div>";
   print "<p style=\"text-align:center; font-weight:bold\">Sto accedendo...</p>";
   print "<p style=\"text-align:center; font-weight:bold\">Logging in...</p>";
@@ -512,7 +468,7 @@ if ($result == 11) {
 
 if (($result == 3) || ($result == 13)) {
     print "
-  <h3 style=\"text-align: center;\">Eurohotel Azzano</h3>
+  <h3 style=\"text-align: center;\">$sitename</h3>
   <p style=\"text-align:center; font-weight:bold\">Logout effettuato con successo</p>
   <p style=\"text-align:center; font-weight:bold\">You are logged out</p>
   <center>

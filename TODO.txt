@@ -1,5 +1,7 @@
 Many things are still TODO:
 
+* Rewrite hotspotlogin.cgi to use strict and warnings!
+
 * Change hotspotlogin.cgi so that is uses TT templates, and remove all
 that stuff in Italian language
 
