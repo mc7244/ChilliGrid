@@ -1,0 +1,11 @@
+# Place this BEFORE the entry which captures all "kern" messages
+Wlansurf :
+
+  facility = "kern"
+  regex = "Wlansurf"
+  maxsize = 10000000
+  maxtime = 86400
+  maxfiles = 30
+  logdir = "/var/log/wlansurf"
+  break = 1
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Wifi Network Management</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="Robots" content="NOINDEX" />
+<meta http-equiv="PRAGMA" content="NO-CACHE" /><!--
+  Web Site: www.ssi-developer.net
+  Comments: Copyright 2003 www.ssi-developer.net
+  Licence:  Creative Commons - Non-commercial Share-Alike
+-->
+<link rel="stylesheet" type="text/css" href="/css/2c-hd-lc-static-layout.css" />
+<link rel="stylesheet" type="text/css" href="/css/2c-hd-lc-static-presentation.css" />
+</head>
+<body>
+<!-- Header -->
+<div id="hdr">
+<div style="font-weight:bold;font-size:12px;margin:6px 10px;">
+<a href="index.cgi">Crea login</a>
+| <a href="index.cgi?task=elist">Lista login</a>
+</div>
+</div>
+
+<!-- right column -->
+<div align="center">
+<div id="rh-col">
+<h3 align="center">EuroHotel Azzano</h3>
+<div align="center" style="color: red;">Retw WiFi - Crea nuovo utente</div>
+
+<p style="height:15px"></p>
+
+<form action="index.cgi" method="get">
+<input type="hidden" id="task" name="task" value="ecreate" />
+
+<p>
+
+Ora inizio:<br />
+<input id="starttime" name="starttime" value="[% starttime | html %]" type="text" style="width:250px" />
+
+<br /><br />
+
+Durata login (in ore):<br />
+<input id="hours" name="hours" value="24" type="text" style="width:100px" />
+
+<br /><br />
+
+Nome cliente:<br />
+<input id="name" name="name" type="text" style="width:300px" />
+
+<br /><br />
+
+Stanza:<br />
+<input id="room" name="room" type="text" style="width:300px" />
+<br /><br />
+
+<input type="submit" value="Crea utente" />
+
+</form>
+
+</p>
+
+</div>
+</div>
+<!-- end of right column -->
+
+</body>
+</html>

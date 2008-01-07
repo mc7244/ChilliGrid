@@ -1,0 +1,6 @@
+AuthUserFile /var/www/localhost/wpasswd
+AuthName     "Protected"
+AuthType     Basic
+<Limit GET POST PUT>
+require user admin
+</Limit>

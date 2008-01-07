@@ -1,0 +1,17 @@
+Many things are still TODO:
+
+* Change hotspotlogin.cgi so that is uses TT templates, and remove all
+that stuff in Italian language
+
+* Make a better dispatcher in the admin script
+
+* Use transactions in some key places
+
+* Improve the administrative view of the list of users
+
+* Some I18N support
+
+* Make the whole thing less hotel-oriented
+
+* Move configuration to a single conf file
+

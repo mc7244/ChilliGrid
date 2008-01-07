@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Wifi Network Management</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="Robots" content="NOINDEX" />
+<meta http-equiv="PRAGMA" content="NO-CACHE" /><!--
+  Web Site: www.ssi-developer.net
+  Comments: Copyright 2003 www.ssi-developer.net
+  Licence:  Creative Commons - Non-commercial Share-Alike
+-->
+<link rel="stylesheet" type="text/css" href="/css/2c-hd-lc-static-layout.css" />
+<link rel="stylesheet" type="text/css" href="/css/2c-hd-lc-static-presentation.css" />
+</head>
+<body>
+<!-- Header -->
+<div id="hdr">
+<div style="font-weight:bold;font-size:12px;margin:6px 10px;">
+<a href="index.cgi">Crea login</a>
+| <a href="index.cgi?task=elist">Lista login</a>
+</div>
+</div>
+
+<!-- right column -->
+<div align="center">
+<div id="rh-col">
+<h3 align="center">EuroHotel Azzano</h3>
+<div align="center" style="color: red; font-weight:bold;">Rete WiFi - Login attivati [% month %]/[% year %]</div>
+
+<p style="height:5px"></p>
+
+<table border="1" width="90%" align="center" style="font-size: 0.7em; text-align: center;">
+<tr>
+  <th>Nome</th>
+  <th>Stanza</th>
+  <th>Username</th>
+  <th>Attivato</th>
+  <th>Scadenza</th>
+  <th>Attivo</th>
+</tr>
+
+[% USE date (format = '%d/%m/%Y, %H:%M', locale = 'it_IT') %]
+[% FOREACH login IN logins %]
+<tr>
+  <td>[% login.name | html %]</td>
+  <td>[% login.room | html %]</td>
+  <td>[% login.UserName | html %]</td>
+  <td>[% date.format(login.activated) | html %]</td>
+  <td>[% date.format(login.expires) | html %]</td>
+  <td>[% IF (login.radiusid) %]<a href="index.cgi?task=ddisable&id=[% login.id %]">sì</a>[% ELSE %]no[% END %]</td>
+</tr>
+[% END %]
+
+</table>
+
+</div>
+</div>
+<!-- end of right column -->
+
+</body>
+</html>
