@@ -26,7 +26,7 @@
 <div align="center">
 <div id="rh-col">
 <h3 align="center">[% sitename | html %]</h3>
-<div align="center" style="color: red;">Retw WiFi - Crea nuovo utente</div>
+<div align="center" style="color: red;">Rete WiFi - Crea nuovo utente</div>
 
 <p style="height:15px"></p>
 

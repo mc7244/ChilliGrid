@@ -28,7 +28,7 @@ my $database_user      = 'freeradius';
 my $database_password  = 'pwd';
 
 # Create query object
-my $q = new CGI::Simple;
+my $q = CGI::Simple->new();
 
 # Connect to MySQL database
 my $dbh = DBI->connect(
