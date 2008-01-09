@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS `mb_user_details`;
 CREATE TABLE `mb_user_details` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `UserName` varchar(64) default NULL,
+  `created` datetime NOT NULL default '0000-00-00 00:00:00',
   `activated` datetime NOT NULL default '0000-00-00 00:00:00',
   `expires` datetime NOT NULL default '0000-00-00 00:00:00',
   `deleted` tinyint NOT NULL default 0,

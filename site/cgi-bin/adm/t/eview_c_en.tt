@@ -1,0 +1,44 @@
+<strong>Username</strong>:
+[% login_data.UserName %]
+
+<br />
+
+<strong>Password</strong>:
+[% login_data.UserPassword %]
+
+<br /><br />
+
+[% USE date (format = '%d %B %Y, %H:%M %Z', locale = 'en_GB') %]
+<strong>Login activation</strong>:
+[% date.format(login_data.activated) | html %]
+<br />
+
+<strong>Login expiration</strong>:
+[% date.format(login_data.expires) | html %]
+
+<br /><br />
+
+<strong>Customer name</strong>:
+[% login_data.name %]
+
+<br />
+
+<strong>Room</strong>:
+[% login_data.room %]
+</p>
+
+<p>
+Here you can find some instructions for the usage of [% sitename | html %] WiFi networks, to be used for internet access or for information exchange with other WiFi users.
+</p>
+
+<ul>
+  <li>When connection, your browser will be automatically redirected to the login page, where you'll be able to enter the above indicated login data. If the rediction doe not happen, please browser <strong>http://www.eha.lan</strong> directly. <strong>IMPORTANT: should your browser alert you of an error with the SSL certificate, choose the <em>continue browsing the Web Site</em> (or similar) option</strong>.
+  </li>
+
+  <li>IP address, gateway and DNS are automatically assigned. If they are not, please chek your PC's network configuration and be sure to enable the &quot;automatically obtain IP address&quot; and &quot;automatically obtain DNS addess&quot; options.</li>
+  <li>In order to connect to this network, a 802.11b or 802.11g compliant WiFi network card is required.</li>
+  <li>This network is secured against external intrusions, but the usage of a firewall on your PC is highly recommended. [% sitename | html %] is not to be held responsible for instrusions or other damage of informatic nature to the PCs of customers.</li>
+  <li>Should you need an SMTP server to send e-mail, please use smtp.fastweb.it. Please do not abuse of this service to send mass e-mails.</li>
+</ul>
+
+<p>The traffic originating from this network towards the Internet is constantly monitored: the collected data will be tendered only to the government and only after a formal demand for it. The usage of this network to spam, exchange illegal or copyright-protected material, hack other users' PCs, or for any other illegal activity, is a crime.</p>

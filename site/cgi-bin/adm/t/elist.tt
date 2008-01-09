@@ -26,7 +26,14 @@
 <div align="center">
 <div id="rh-col">
 <h3 align="center">[% sitename | html %]</h3>
-<div align="center" style="color: red; font-weight:bold;">Rete WiFi - Login attivati [% month %]/[% year %]</div>
+<div align="center" style="color: red; font-weight:bold;">Rete WiFi - Login attivati<br />[% curdate | html %]</div>
+
+<div id="filterform_div">
+<form id="filterform" action="index.cgi" method="get">
+  <input type="hidden" name="task" value="elist" />
+  <input type="text" style="width:150px" name="curdate" value="[% curdate | html %]" />
+  <input type="submit" value="visualizza" />
+</form>
 
 <p style="height:5px"></p>
 
@@ -35,6 +42,7 @@
   <th>Nome</th>
   <th>Stanza</th>
   <th>Username</th>
+  <th>Creato</th>
   <th>Attivato</th>
   <th>Scadenza</th>
   <th>Attivo</th>
@@ -46,6 +54,7 @@
   <td>[% login.name | html %]</td>
   <td>[% login.room | html %]</td>
   <td>[% login.UserName | html %]</td>
+  <td>[% date.format(login.created) | html %]</td>
   <td>[% date.format(login.activated) | html %]</td>
   <td>[% date.format(login.expires) | html %]</td>
   <td>[% IF (login.radiusid) %]<a href="index.cgi?task=ddisable&id=[% login.id %]">sì</a>[% ELSE %]no[% END %]</td>

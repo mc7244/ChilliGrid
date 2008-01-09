@@ -12,7 +12,7 @@ use DateTime;
 use DateTime::Format::Strptime;
 use DateTime::Format::MySQL;
 
-our $VERSION = '0.02004';
+our $VERSION = '0.02010';
 
 # Sitename for templates
 my $sitename = 'MY SITENAME';
@@ -28,7 +28,7 @@ my $database_user      = 'freeradius';
 my $database_password  = 'pwd';
 
 # Create query object
-my $q = CGI::Simple->new();
+my $q = CGI::Simple->new;
 
 # Connect to MySQL database
 my $dbh = DBI->connect(
@@ -64,10 +64,10 @@ sub emain {
 	);
 
 	my $now = DateTime->now( time_zone => 'local');
-	$t->process( $t_file, {
+	$t->process($t_file, {
 		starttime	=> $dtf_strp->format_datetime($now),
         sitename    => $sitename,
-	} );
+	}) or die $t->error();
 }
 
 #######################################################################
@@ -126,11 +126,13 @@ sub ecreate {
 	$dbh->do("
 		insert into mb_user_details (
 		UserName, activated, expires,
-		name, room
+		name, room,
+		created
 		) values (
 		'$UserName',
 		'$starttime_sql', '$endtime_sql',
-		$name, $room
+		$name, $room,
+		now()
 		)
 	") or die "ecreate-2: ".$dbh->errstr();
 	
@@ -140,7 +142,7 @@ sub ecreate {
 	$dbh->commit();
 
 	print $q->header(
-		-location => "$script_base?task=eview&id=$id"
+		-location => "$script_base?task=eview&id=$id&langistr=" . $q->param('langistr'),
 	);
 }
 
@@ -166,9 +168,10 @@ sub eview {
 	") or die "eview-1: ".$dbh->errstr();
 
 	$t->process($t_file, {
-        login_data  => $login_ref.
-        sitename    => $sitename,
-    });
+		login_data  => $login_ref,
+		sitename    => $sitename,
+		langistr    => ''.$q->param('langistr'),
+	}) or die $t->error();
 }
 
 #######################################################################
@@ -176,15 +179,27 @@ sub eview {
 sub elist {
 	my $t_file = 'elist.tt';
 
-	# If we have no date, show current month
-	use POSIX;
-	my @ltime = localtime();
-	my $month = strftime("%m", @ltime);
-	my $year  = strftime("%Y", @ltime);
+        my $cd_strp = DateTime::Format::Strptime->new(
+		pattern => '%Y-%m-%d',
+	);
+
+	# Grab given date
+	my $curdate_str = $q->param('curdate');
+	my $curdate;
+	if (defined $curdate_str) {
+		die "Invalid-date" if $curdate_str
+			!~ m/\A \d{4}-\d{2}-\d{2} \z/xms;
+		$curdate = $cd_strp->parse_datetime( $curdate_str );
+	}
+	# Should we have no date, we use today
+	else {
+		$curdate = DateTime->now( time_zone => 'local' );
+	}
 	
 	# Get data of login
 	my $query = "
 		select mb_user_details.id, mb_user_details.UserName,
+		unix_timestamp(mb_user_details.created) as created,
 		unix_timestamp(mb_user_details.activated) as activated,
 		unix_timestamp(mb_user_details.expires) as expires,
 		mb_user_details.name, mb_user_details.room,
@@ -193,20 +208,20 @@ sub elist {
 		left join radcheck
 		  on radcheck.UserName = mb_user_details.UserName
 		where
-		year(mb_user_details.activated) = $year
-		and month(mb_user_details.activated) = $month
+		date(mb_user_details.activated) = ?
 	";
 	my $sth = $dbh->prepare( $query )
 		or die "elist-1: ".$dbh->errstr();
-	$sth->execute() or die "elist-1: ".$dbh->errstr();
+	$sth->execute(
+		DateTime::Format::MySQL->format_date( $curdate )
+	) or die "elist-1: ".$dbh->errstr();
 	my $logins_ref = $sth->fetchall_arrayref( {} );
 
 	$t->process( $t_file,  {
 		logins    => $logins_ref,
-		month     => $month,
-		year      => $year,
-        sitename  => $sitename,
-	} );
+		curdate   => $cd_strp->format_datetime($curdate),
+        	sitename  => $sitename,
+	}) or die $t->error();
 }
 
 #######################################################################

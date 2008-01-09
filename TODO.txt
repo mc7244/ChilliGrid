@@ -17,3 +17,4 @@ that stuff in Italian language
 
 * Move configuration to a single conf file
 
+* Fix all dates to use DateTime

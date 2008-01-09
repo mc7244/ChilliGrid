@@ -54,6 +54,13 @@ Stanza:<br />
 <input id="room" name="room" type="text" style="width:300px" />
 <br /><br />
 
+Lingua istruzioni:<br />
+<select name="langistr">
+  <option value="it">italiano</option>
+  <option value="en">inglese</option>
+</select>
+<br /><br />
+
 <input type="submit" value="Crea utente" />
 
 </form>
